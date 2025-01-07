@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Thông tin tài khoản</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Thông tin tài khoản</h1>
+            <div id="userInfo"></div>
+            <button onclick="logout()">Đăng xuất</button>
+        </div>
+    </div>
+    <script>
+        // Đây là để thể hiện thông tin người dùng
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (!currentUser) {
+            window.location.href = 'login.html';
+        }
+        
+        const userInfo = document.getElementById('userInfo');
+        userInfo.innerHTML = `
+            <p><strong>Họ:</strong> ${currentUser.firstName}</p>
+            <p><strong>Tên:</strong> ${currentUser.lastName}</p>
+            <p><strong>Email:</strong> ${currentUser.email}</p>
+            <p><strong>Ngày sinh:</strong> ${currentUser.birthday}</p>
+        `;
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
